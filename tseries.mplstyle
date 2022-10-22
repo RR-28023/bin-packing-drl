@@ -1,0 +1,70 @@
+# Set custom colors. All colors are in web style hex format.
+axes.prop_cycle: cycler('color', ['3B6BF0', '186B29', '8D3E1C', '585E5F', '9C7B04'])
+figure.facecolor: white
+
+# Chart border
+axes.linewidth: 1               # Spine edge line width
+axes.spines.top: False          # Display axis spines (True or False)
+axes.spines.left: False         # We only want the bottom spines
+axes.spines.right: False
+axes.spines.bottom: True
+
+# Chart area
+axes.facecolor: white         # Color of the chart area
+
+# Set line styling for line plots
+lines.linewidth: 2              # line width in points
+lines.solid_capstyle: butt      # Makes a square ending of the line stopping at datapoint
+lines.markersize: 3           # marker size, in points
+
+# Grid style
+axes.grid: true                 # display grid or not
+axes.grid.axis: y               # which axis the grid should apply to          
+grid.linewidth: 1               # in points
+grid.color: A5A5A5            # grid color
+axes.axisbelow: True            # Sets axis gridlines below lines and patches.
+
+# Setting fonts and fonts spacing
+font.family: Roboto
+font.size: 12                   # default font size for text, given in points.
+# axes.labelsize: 10              # font size of the x and y labels
+
+# X ticks and labels
+xtick.color: black
+xtick.major.size: 4            # major tick size in points
+xtick.labelsize: 12             # font size of the x tick labels      
+xtick.major.pad: 4              # distance to major tick label in points  
+
+# Y ticks and labels
+ytick.major.size: 0
+ytick.minor.size: 0
+ytick.alignment: bottom         # alignment of yticks; "bottom" will put them on top of the lines
+ytick.labelsize: 12             # font size of the y tick labels
+ytick.labelleft: False          # draw tick labels on the left side
+ytick.labelright: True          # draw tick labels on the right side
+ytick.major.pad: -15            # distance to major tick label in points
+
+# Title styling
+axes.titlelocation: left        # alignment of the title: {left, right, center}
+axes.titlesize: 14              # font size of the axes title
+axes.titlepad: 30              # pad between axes and title in points
+axes.titleweight: bold          # font weight of title
+
+# Legend Styling
+legend.framealpha: 1
+legend.loc: best
+legend.borderaxespad: 0
+legend.fontsize: 9
+
+# Set spacing for figure and also DPI.
+figure.subplot.left: 0.08       # the left side of the subplots of the figure
+figure.subplot.right: 0.95      # the right side of the subplots of the figure
+figure.subplot.bottom: 0.07     # the bottom of the subplots of the figure
+figure.figsize: 7, 5            # figure size in inches W, H
+figure.dpi: 100                 # figure dots per inch
+
+# Properties for saving the figure. Ensure a high DPI when saving so we have a good resolution.
+savefig.dpi: 150          # figure dots per inch or 'figure'
+savefig.facecolor: white        # figure face color when saving
+savefig.bbox: tight        # {tight, standard}
+savefig.pad_inches: 0.2       # padding when bbox is set to tight

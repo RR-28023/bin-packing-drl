@@ -1,0 +1,4 @@
+-i https://pypi.org/simple
+numpy==1.23.4
+torch==1.12.1
+typing-extensions==4.4.0 ; python_version >= '3.9'
