@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 numpy = "*"
 torch = "*"
+tqdm = "*"
+matplotlib = "*"
 
 [dev-packages]
 black = "*"

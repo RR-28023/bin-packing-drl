@@ -19,7 +19,7 @@ from actor_critic import Actor
 from rl_env import get_benchmark_rewards
 
 
-if __name__ == "__main__":
+def train(profiler):    
     
     config, _ = get_config()
     torch.manual_seed(config.seed)
@@ -35,15 +35,17 @@ if __name__ == "__main__":
     pbar = tqdm(range(config.n_episodes))
     for i in pbar:
         states, states_lens, len_mask = states_generator.generate_states_batch()
+        profiler.enable()
         agent_loss, critic_loss, agent_reward, predicted_reward = agent.reinforce_step(
             states,
             states_lens,
             len_mask,
             verbose=False,  # True if i % 500 == 0 else False
         )
+        profiler.disable()
         agent_rewards.append(agent_reward)
         
-        if i % 1000 == 0 and i > 0:
+        if i % 200 == 0 and i > 0:
             agent.lr_scheduler_actor.step()
             agent.lr_scheduler_critic.step()
 
@@ -79,3 +81,17 @@ if __name__ == "__main__":
         row_values.extend([np.mean(agent_rewards[-100:]), nf_reward, ff_reward, ffd_reward])
         writer.writerow(row_values) 
     
+if __name__ == "__main__":
+    import cProfile, pstats, io
+    profiler = cProfile.Profile()
+    # profiler.enable()
+    train(profiler)
+    # profiler.disable()
+    s = io.StringIO()
+    stats = pstats.Stats(profiler, stream=s).strip_dirs().sort_stats("cumtime")
+    # stats.print_stats()
+    stats.print_stats(
+        # "run_experiments.py|measure_embeddings_quality.py|get_nearest_examples"
+    )
+    with open("./profiler_output.txt", "w") as f:
+            f.write(s.getvalue())

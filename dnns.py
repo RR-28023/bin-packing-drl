@@ -106,6 +106,7 @@ class ActorPointerNetwork(nn.Module):
         )
         self.attention = BahdanauAttention(config.hid_dim)
         self.max_len = config.max_num_items
+        self.device = config.device
 
     def forward(self, states_batch, states_lens, len_mask):
         from copy import deepcopy
@@ -122,7 +123,7 @@ class ActorPointerNetwork(nn.Module):
         enc_output = pad_packed_sequence(
             enc_output, batch_first=True, total_length=len_mask.shape[-1]
         )[0]
-        dec_input = -1 * torch.ones(states_batch.shape[0], 1, 1)
+        dec_input = -1 * torch.ones(states_batch.shape[0], 1, 1).to(self.device)
         pointer_mask = len_mask.clone()
         actions_seq = -1 * torch.ones_like(pointer_mask)
         actions_log_probs = torch.zeros_like(pointer_mask, dtype=torch.float32)
