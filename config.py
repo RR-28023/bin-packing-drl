@@ -11,10 +11,10 @@ parameters_definition = {
     # PROBLEM CONDITIONS #
     "min_item_size": { "value": 4, "type": int, "desc": "Minimum item size"},
     "max_item_size": { "value": 14, "type": int, "desc": "Maximum item size"},
-    "min_num_items": { "value": 3, "type": int, "desc": "Minimum number of items"},
+    "min_num_items": { "value": 50, "type": int, "desc": "Minimum number of items"},
     "max_num_items": { "value": 50, "type": int, "desc": "Maximum number of items"},
     "bin_size": { "value": 15, "type": int, "desc": "Bin size"},
-    "agent_heuristic": {"value": "NF", "type": str, "desc": "Heursitic used by the agent to allocate the sequence output"},
+    "agent_heuristic": {"value": "FF", "type": str, "desc": "Heursitic used by the agent to allocate the sequence output"},
 
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
