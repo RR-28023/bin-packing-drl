@@ -1,0 +1,15 @@
+{
+    "files.watcherExclude": {
+        ".venv/**": true,
+        "*/.github/*": true
+    },
+    "python.analysis.indexing": true,
+    "python.languageServer": "Pylance",
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length", "88"
+    ],
+    "editor.rulers": [
+        88
+    ],
+}

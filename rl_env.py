@@ -46,7 +46,7 @@ def compute_reward(config, states_batch, len_mask, actions_batch):
     actions_batch = actions_batch.numpy()
     avg_occupancy_ratios = []
     for states, actions in zip(states_batch, actions_batch):
-        avg_occupancy_ratios.append(avg_occupancy(bin_size, states, actions, heuristic='NF'))
+        avg_occupancy_ratios.append(avg_occupancy(bin_size, states, actions, heuristic=config.agent_heuristic))
 
     return np.array(avg_occupancy_ratios)
 
