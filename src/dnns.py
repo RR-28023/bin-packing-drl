@@ -87,8 +87,6 @@ class CriticNetwork(nn.Module):
         att_weights = att_weights*len_mask
         x = self.dense1(att_weights)
         pred_reward = self.dense2(x)
-        #x = nn.functional.relu(self.dense1(att_weights))
-        #pred_reward = nn.functional.relu(self.dense2(x))
         return pred_reward.squeeze(-1)
 
 
@@ -106,12 +104,12 @@ class ActorPointerNetwork(nn.Module):
         )
         self.attention = BahdanauAttention(config.hid_dim)
         self.max_len = config.max_num_items
+
         # Initial input to pass to the decoder:
         self.dec_input = -1 * torch.ones(config.batch_size, 1, 1).to(config.device)
         self.device = config.device         
 
     def forward(self, states_batch, states_lens, len_mask, len_mask_device):
-        from copy import deepcopy
 
         input_embedded = self.embedding(
             states_batch
@@ -147,8 +145,6 @@ class ActorPointerNetwork(nn.Module):
             dec_input = (
                 selected_item.unsqueeze(-1)
                 .unsqueeze(-1)
-                #.clone()
-                #.detach()
                 .to(torch.float32)
             )
         actions_log_probs = actions_log_probs*len_mask_device

@@ -27,9 +27,8 @@ parameters_definition = {
 
     # RUN OPTIONS #
     "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
-    "inference_only": {"value": False, "type": str2bool, "desc": "Do not train the model"},
-    "model_path": { "value": None, "type": str, "desc": "If inference_only, path to the model ckpt to use"},
-
+    "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
+    "model_path": {"value": None, "type": str, "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"},
 }
 
 def get_config():

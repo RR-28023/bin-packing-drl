@@ -18,9 +18,8 @@ from actor_critic import Actor
 from rl_env import StatesGenerator, get_benchmark_rewards
 
 
-def train():    
+def train(config):    
     
-    config, _ = get_config()
     torch.manual_seed(config.seed)
     np.random.seed(config.seed)
     states_generator = StatesGenerator(config)
@@ -79,13 +78,20 @@ def train():
         writer = csv.writer(f)
         row_values = list(vars(config).values())
         row_values.extend([np.mean(agent_rewards[-100:]), nf_reward, ff_reward, ffd_reward])
-        writer.writerow(row_values) 
+        writer.writerow(row_values)
+
+    # Save trained actor model
+    if config.model_path:
+        torch.save(agent.policy_dnn, "./experiments/policy_dnn.pkl")
     
 if __name__ == "__main__":
+
+    # Train with time profiling
     import cProfile, pstats, io
     profiler = cProfile.Profile()
     profiler.enable()
-    train()
+    config, _ = get_config()
+    train(config)
     profiler.disable()
     s = io.StringIO()
     stats = pstats.Stats(profiler, stream=s).strip_dirs().sort_stats("cumtime")
