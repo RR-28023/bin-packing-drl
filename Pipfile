@@ -4,10 +4,20 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "*"
-torch = "*"
-tqdm = "*"
-matplotlib = "*"
+numpy = "==1.23.4"
+torch = "==1.12.1"
+tqdm = "==4.64.1"
+matplotlib = "==3.6.1"
+contourpy = "==1.0.5"
+cycler = "==0.11.0"
+fonttools = "==4.38.0"
+kiwisolver = "==1.4.4"
+packaging = "==21.3"
+pillow = "==9.2.0"
+pyparsing = "==3.0.9"
+python-dateutil = "==2.8.2"
+six = "==1.16.0"
+typing-extensions = "==4.4.0"
 
 [dev-packages]
 black = "*"

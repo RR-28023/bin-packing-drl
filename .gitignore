@@ -2,3 +2,4 @@
 *.png
 *.csv
 *.txt
+.venv/
