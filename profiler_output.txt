@@ -1,163 +1,163 @@
-         117224936 function calls (113074936 primitive calls) in 1339.689 seconds
+         174136824 function calls (167911824 primitive calls) in 2039.270 seconds
 
    Ordered by: cumulative time
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-    10000    1.185    0.000 1339.683    0.134 actor_critic.py:35(reinforce_step)
-    20000    0.176    0.000  573.419    0.029 _tensor.py:340(backward)
-    20000    0.141    0.000  573.238    0.029 __init__.py:85(backward)
-    20000  572.622    0.029  572.622    0.029 {method 'run_backward' of 'torch._C._EngineBase' objects}
-4180000/30000   11.228    0.000  531.281    0.018 module.py:1124(_call_impl)
-    10000   29.107    0.003  499.602    0.050 dnns.py:111(forward)
-   510000   63.094    0.000  236.937    0.000 dnns.py:19(forward)
-    10000    1.901    0.000  187.656    0.019 rl_env.py:40(compute_reward)
-  1280000  163.627    0.000  185.413    0.000 rl_env.py:4(avg_occupancy)
-   520000    5.845    0.000  105.552    0.000 rnn.py:721(forward)
-   520000   91.452    0.000   91.452    0.000 {built-in method torch.lstm}
-  3100000    4.759    0.000   90.178    0.000 linear.py:113(forward)
-  3100000   83.485    0.000   83.485    0.000 {built-in method torch._C._nn.linear}
-   500000   78.239    0.000   78.239    0.000 {built-in method torch.multinomial}
-    20000    0.135    0.000   36.603    0.002 lr_scheduler.py:60(wrapper)
-    20000    0.258    0.000   36.467    0.002 optimizer.py:108(wrapper)
-    20000    0.142    0.000   33.585    0.002 grad_mode.py:24(decorate_context)
-    20000    1.204    0.000   33.083    0.002 adam.py:105(step)
-    20000    0.108    0.000   30.692    0.002 adam.py:176(adam)
-    10000    0.431    0.000   30.515    0.003 dnns.py:73(forward)
-    20000    9.738    0.000   30.463    0.002 adam.py:229(_single_tensor_adam)
-  1030000    1.220    0.000   19.245    0.000 _tensor.py:26(wrapped)
-  1030000    0.913    0.000   17.661    0.000 _tensor.py:637(__rsub__)
-  1030000   16.748    0.000   16.748    0.000 {built-in method torch.rsub}
-  1280000    1.013    0.000   15.854    0.000 <__array_function__ internals>:177(mean)
-    20000    1.051    0.000   14.794    0.001 rnn.py:264(pad_packed_sequence)
-  1280000    0.909    0.000   14.609    0.000 {built-in method numpy.core._multiarray_umath.implement_array_function}
-  1000000    1.085    0.000   14.011    0.000 functional.py:1804(softmax)
-  1280000    1.690    0.000   13.700    0.000 fromnumeric.py:3313(mean)
-    20000   13.397    0.001   13.397    0.001 {built-in method torch._pad_packed_sequence}
-  3060000   13.237    0.000   13.237    0.000 {method 'squeeze' of 'torch._C._TensorBase' objects}
-  1020000   13.114    0.000   13.114    0.000 {built-in method torch.tanh}
-  1000000   12.691    0.000   12.691    0.000 {method 'softmax' of 'torch._C._TensorBase' objects}
-  1290000    4.485    0.000   12.658    0.000 _methods.py:163(_mean)
-    20000    0.285    0.000   12.155    0.001 rnn.py:207(pack_padded_sequence)
-  3030000    9.928    0.000    9.928    0.000 {method 'unsqueeze' of 'torch._C._TensorBase' objects}
-    20000    8.702    0.000    8.702    0.000 {built-in method torch._pack_padded_sequence}
-   500000    7.938    0.000    7.938    0.000 {built-in method torch.gather}
-   560000    7.341    0.000    7.341    0.000 {method 'to' of 'torch._C._TensorBase' objects}
-   520000    7.044    0.000    7.044    0.000 {method 'scatter_' of 'torch._C._TensorBase' objects}
-   510000    7.013    0.000    7.013    0.000 {built-in method torch.bmm}
-   510000    6.893    0.000    6.893    0.000 {method 'clone' of 'torch._C._TensorBase' objects}
- 10470000    6.450    0.000    6.450    0.000 module.py:1194(__getattr__)
-   500000    0.438    0.000    6.302    0.000 functional.py:1902(log_softmax)
-   760000    6.044    0.000    6.044    0.000 {method 'mul_' of 'torch._C._TensorBase' objects}
-   500000    5.787    0.000    5.787    0.000 {method 'log_softmax' of 'torch._C._TensorBase' objects}
-   780000    5.727    0.000    5.727    0.000 {method 'add_' of 'torch._C._TensorBase' objects}
-   520000    1.476    0.000    4.698    0.000 rnn.py:687(check_forward_args)
-    20000    0.908    0.000    4.414    0.000 optimizer.py:216(zero_grad)
-  1290000    4.052    0.000    4.052    0.000 {built-in method numpy.array}
-  4200000    3.861    0.000    3.861    0.000 {built-in method torch._C._get_tracing_state}
-  1290000    3.590    0.000    3.590    0.000 {method 'reduce' of 'numpy.ufunc' objects}
-  1290000    2.957    0.000    3.319    0.000 _methods.py:66(_count_reduce_items)
-   380000    3.170    0.000    3.170    0.000 {method 'sqrt' of 'torch._C._TensorBase' objects}
-   550000    2.846    0.000    2.846    0.000 {built-in method torch.swapaxes}
-   380000    2.815    0.000    2.815    0.000 {method 'addcdiv_' of 'torch._C._TensorBase' objects}
-   380000    2.641    0.000    2.641    0.000 {method 'addcmul_' of 'torch._C._TensorBase' objects}
-    80000    2.466    0.000    2.466    0.000 {built-in method torch.zeros}
- 25854993    2.318    0.000    2.318    0.000 {method 'append' of 'list' objects}
-   540000    2.169    0.000    2.169    0.000 {method 'detach' of 'torch._C._TensorBase' objects}
-    20000    0.194    0.000    2.154    0.000 batchnorm.py:134(forward)
-    40000    0.123    0.000    2.114    0.000 profiler.py:436(__init__)
-   379962    1.935    0.000    1.935    0.000 {method 'zero_' of 'torch._C._TensorBase' objects}
-    20000    0.139    0.000    1.498    0.000 functional.py:2407(batch_norm)
-    80000    1.428    0.000    1.428    0.000 {method 'index_select' of 'torch._C._TensorBase' objects}
-    20000    0.062    0.000    1.322    0.000 rnn.py:187(_packed_sequence_init)
-  3120000    1.286    0.000    1.286    0.000 {method 'size' of 'torch._C._TensorBase' objects}
-    60000    0.351    0.000    1.272    0.000 rnn.py:156(_packed_sequence_init_args)
-    50000    1.250    0.000    1.250    0.000 {method 'cpu' of 'torch._C._TensorBase' objects}
-  2659886    0.984    0.000    1.226    0.000 _tensor.py:1071(grad)
-    20000    1.219    0.000    1.219    0.000 {built-in method torch.batch_norm}
-  1040000    0.578    0.000    1.078    0.000 rnn.py:223(check_hidden_size)
-  1020000    0.300    0.000    1.046    0.000 rnn.py:699(permute_hidden)
-    20000    0.122    0.000    0.920    0.000 rnn.py:198(invert_permutation)
-  2770000    0.880    0.000    0.880    0.000 {built-in method builtins.isinstance}
-    80000    0.106    0.000    0.874    0.000 _ops.py:138(__call__)
-   400000    0.855    0.000    0.855    0.000 {method 'item' of 'torch._C._TensorBase' objects}
-    30038    0.850    0.000    0.850    0.000 {built-in method torch.tensor}
-    40000    0.203    0.000    0.836    0.000 profiler.py:445(__enter__)
-   520000    0.709    0.000    0.824    0.000 rnn.py:209(get_expected_hidden_size)
-    10000    0.027    0.000    0.822    0.000 loss.py:529(forward)
-   520000    0.548    0.000    0.809    0.000 rnn.py:198(check_input)
-    10000    0.088    0.000    0.794    0.000 functional.py:3252(mse_loss)
-    40000    0.034    0.000    0.747    0.000 rnn.py:20(apply_permutation)
-    20000    0.688    0.000    0.688    0.000 {built-in method torch.sort}
-    10000    0.028    0.000    0.676    0.000 {method 'mean' of 'numpy.ndarray' objects}
-   570000    0.419    0.000    0.645    0.000 _VF.py:25(__getattr__)
-  4559924    0.593    0.000    0.593    0.000 {built-in method torch._C._has_torch_function_unary}
-    40000    0.568    0.000    0.568    0.000 {built-in method torch._ops.profiler._record_function_enter}
-    10000    0.549    0.000    0.549    0.000 {built-in method torch._C._nn.mse_loss}
-   520000    0.394    0.000    0.511    0.000 rnn.py:675(get_expected_cell_size)
-  2060000    0.472    0.000    0.472    0.000 {method 'dim' of 'torch._C._TensorBase' objects}
-    20000    0.116    0.000    0.439    0.000 __init__.py:30(_make_grads)
-    30000    0.433    0.000    0.433    0.000 {built-in method torch.ones_like}
-  2580000    0.430    0.000    0.430    0.000 {built-in method builtins.issubclass}
-  1330000    0.379    0.000    0.379    0.000 {built-in method builtins.hasattr}
-    40000    0.164    0.000    0.378    0.000 rnn.py:63(__new__)
-  1040000    0.367    0.000    0.367    0.000 {built-in method torch._C._has_torch_function}
-  1290000    0.362    0.000    0.362    0.000 {built-in method numpy.core._multiarray_umath.normalize_axis_index}
-    40000    0.108    0.000    0.349    0.000 profiler.py:449(__exit__)
-    20000    0.325    0.000    0.325    0.000 {built-in method torch.arange}
-   380038    0.140    0.000    0.236    0.000 _tensor.py:731(__hash__)
-   590000    0.233    0.000    0.233    0.000 {built-in method builtins.getattr}
-  1280000    0.233    0.000    0.233    0.000 fromnumeric.py:3308(_mean_dispatcher)
-    10000    0.212    0.000    0.212    0.000 {method 'mean' of 'torch._C._TensorBase' objects}
-    40000    0.200    0.000    0.200    0.000 {built-in method torch._ops.profiler._record_function_exit}
-    20000    0.099    0.000    0.198    0.000 optimizer.py:84(_cuda_graph_capture_health_check)
-  1290000    0.190    0.000    0.190    0.000 {built-in method numpy.asanyarray}
-    10000    0.188    0.000    0.188    0.000 {built-in method torch.mean}
-    10000    0.186    0.000    0.186    0.000 {built-in method torch.sum}
-    20000    0.183    0.000    0.183    0.000 {built-in method torch.as_tensor}
-   380000    0.157    0.000    0.157    0.000 {method 'conj' of 'torch._C._TensorBase' objects}
-   379962    0.151    0.000    0.151    0.000 {method 'requires_grad_' of 'torch._C._TensorBase' objects}
-    20000    0.037    0.000    0.139    0.000 grad_mode.py:82(clone)
-    10000    0.050    0.000    0.128    0.000 functional.py:44(broadcast_tensors)
-    20000    0.128    0.000    0.128    0.000 {built-in method torch.empty_like}
-    20000    0.060    0.000    0.119    0.000 grad_mode.py:131(__enter__)
-    10076    0.118    0.000    0.118    0.000 {built-in method torch.zeros_like}
-    20000    0.081    0.000    0.112    0.000 adam.py:198(<listcomp>)
-    20000    0.051    0.000    0.103    0.000 grad_mode.py:135(__exit__)
-    20000    0.096    0.000    0.102    0.000 grad_mode.py:126(__init__)
-    40000    0.077    0.000    0.099    0.000 grad_mode.py:226(__init__)
-    10000    0.098    0.000    0.098    0.000 {built-in method torch.ones}
-    30000    0.092    0.000    0.092    0.000 {method 'numpy' of 'torch._C._TensorBase' objects}
-   380000    0.075    0.000    0.075    0.000 {built-in method math.sqrt}
-    20000    0.034    0.000    0.071    0.000 __init__.py:77(is_available)
-    20000    0.063    0.000    0.069    0.000 functional.py:2390(_verify_batch_size)
-   380040    0.063    0.000    0.063    0.000 {built-in method builtins.id}
-    10000    0.062    0.000    0.062    0.000 {built-in method torch.broadcast_tensors}
-    40000    0.031    0.000    0.058    0.000 <string>:1(<lambda>)
-   420000    0.056    0.000    0.056    0.000 {built-in method builtins.len}
-    20000    0.027    0.000    0.039    0.000 batchnorm.py:296(_check_input_dim)
-    20002    0.037    0.000    0.037    0.000 {method 'format' of 'str' objects}
-    20000    0.021    0.000    0.036    0.000 __init__.py:31(__get__)
-    40000    0.027    0.000    0.027    0.000 {built-in method __new__ of type object at 0xafa2c0}
-    20000    0.024    0.000    0.024    0.000 {built-in method torch._C._cuda_getDeviceCount}
-    60000    0.023    0.000    0.023    0.000 {built-in method torch.is_grad_enabled}
-    20000    0.014    0.000    0.022    0.000 graphs.py:18(is_current_stream_capturing)
-    40000    0.020    0.000    0.020    0.000 {method 'numel' of 'torch._C._TensorBase' objects}
-    20000    0.015    0.000    0.015    0.000 {built-in method torch._C._get_cudnn_enabled}
-    20000    0.013    0.000    0.013    0.000 __init__.py:77(_tensor_or_tensors_to_tuple)
-    30000    0.013    0.000    0.013    0.000 {built-in method torch._C._has_torch_function_variadic}
-    20000    0.011    0.000    0.011    0.000 {method 'get' of 'dict' objects}
-    40000    0.010    0.000    0.010    0.000 {built-in method torch._C._set_grad_enabled}
-    20000    0.009    0.000    0.009    0.000 {built-in method builtins.all}
-    10000    0.008    0.000    0.008    0.000 _reduction.py:7(get_enum)
-    20000    0.008    0.000    0.008    0.000 {built-in method torch._C._cuda_isCurrentStreamCapturing}
-    10000    0.006    0.000    0.006    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-    20000    0.006    0.000    0.006    0.000 _jit_internal.py:958(is_scripting)
+    15000    1.948    0.000 2039.261    0.136 actor_critic.py:35(reinforce_step)
+6270000/45000   18.314    0.000  955.836    0.021 module.py:1124(_call_impl)
+    30000    0.336    0.000  919.159    0.031 _tensor.py:340(backward)
+    30000    0.287    0.000  918.813    0.031 __init__.py:85(backward)
+    30000  917.702    0.031  917.702    0.031 {method 'run_backward' of 'torch._C._EngineBase' objects}
+    15000   97.704    0.007  902.552    0.060 dnns.py:113(forward)
+   765000  100.413    0.000  381.631    0.000 dnns.py:19(forward)
+   750000  186.112    0.000  186.112    0.000 {built-in method torch.multinomial}
+   780000    9.115    0.000  168.943    0.000 rnn.py:721(forward)
+   780000  146.742    0.000  146.742    0.000 {built-in method torch.lstm}
+  4650000    7.693    0.000  146.427    0.000 linear.py:113(forward)
+  4650000  135.711    0.000  135.711    0.000 {built-in method torch._C._nn.linear}
+    15000    3.109    0.000   77.975    0.005 rl_env.py:41(compute_reward)
+  1920000   43.852    0.000   74.139    0.000 rl_env.py:5(avg_occupancy)
+    30000    0.283    0.000   61.722    0.002 lr_scheduler.py:60(wrapper)
+    30000    0.537    0.000   61.438    0.002 optimizer.py:108(wrapper)
+    30000    0.262    0.000   54.441    0.002 grad_mode.py:24(decorate_context)
+    30000    2.043    0.000   53.478    0.002 adam.py:105(step)
+    15000    0.737    0.000   51.313    0.003 dnns.py:73(forward)
+    30000    0.190    0.000   49.430    0.002 adam.py:176(adam)
+    30000   15.855    0.001   49.043    0.002 adam.py:229(_single_tensor_adam)
+  1545000    1.871    0.000   30.941    0.000 _tensor.py:26(wrapped)
+  1545000    1.407    0.000   28.456    0.000 _tensor.py:637(__rsub__)
+  1545000   27.049    0.000   27.049    0.000 {built-in method torch.rsub}
+    30000    2.629    0.000   24.770    0.001 rnn.py:264(pad_packed_sequence)
+  1920000    1.621    0.000   23.862    0.000 <__array_function__ internals>:177(mean)
+  1500000    2.056    0.000   22.739    0.000 functional.py:1804(softmax)
+  1920000    1.258    0.000   21.893    0.000 {built-in method numpy.core._multiarray_umath.implement_array_function}
+  4575000   21.628    0.000   21.628    0.000 {method 'squeeze' of 'torch._C._TensorBase' objects}
+    30000   21.586    0.001   21.586    0.001 {built-in method torch._pad_packed_sequence}
+    30000    0.504    0.000   21.400    0.001 rnn.py:207(pack_padded_sequence)
+  1530000   21.201    0.000   21.201    0.000 {built-in method torch.tanh}
+  1920000    2.548    0.000   20.635    0.000 fromnumeric.py:3313(mean)
+  1500000   20.273    0.000   20.273    0.000 {method 'softmax' of 'torch._C._TensorBase' objects}
+  1935000    6.680    0.000   19.175    0.000 _methods.py:163(_mean)
+  4545000   16.144    0.000   16.144    0.000 {method 'unsqueeze' of 'torch._C._TensorBase' objects}
+   825000   15.539    0.000   15.539    0.000 {method 'to' of 'torch._C._TensorBase' objects}
+    30000   14.080    0.000   14.080    0.000 {built-in method torch._pack_padded_sequence}
+   750000   12.510    0.000   12.510    0.000 {built-in method torch.gather}
+   765000   11.451    0.000   11.451    0.000 {built-in method torch.bmm}
+   780000   11.276    0.000   11.276    0.000 {method 'scatter_' of 'torch._C._TensorBase' objects}
+ 15705000   10.530    0.000   10.530    0.000 module.py:1194(__getattr__)
+   750000    0.681    0.000   10.109    0.000 functional.py:1902(log_softmax)
+  1140000    9.786    0.000    9.786    0.000 {method 'mul_' of 'torch._C._TensorBase' objects}
+   750000    9.296    0.000    9.296    0.000 {method 'log_softmax' of 'torch._C._TensorBase' objects}
+  1170000    9.185    0.000    9.185    0.000 {method 'add_' of 'torch._C._TensorBase' objects}
+    30000    1.640    0.000    7.803    0.000 optimizer.py:216(zero_grad)
+   780000    2.328    0.000    7.352    0.000 rnn.py:687(check_forward_args)
+   600000    6.783    0.000    6.783    0.000 {method 'item' of 'torch._C._TensorBase' objects}
+   120000    5.974    0.000    5.974    0.000 {built-in method torch.zeros}
+  1935000    5.642    0.000    5.642    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+  6300000    5.586    0.000    5.586    0.000 {built-in method torch._C._get_tracing_state}
+    60000    0.236    0.000    5.446    0.000 profiler.py:436(__init__)
+   570000    5.063    0.000    5.063    0.000 {method 'sqrt' of 'torch._C._TensorBase' objects}
+  1935000    4.290    0.000    4.777    0.000 _methods.py:66(_count_reduce_items)
+   825000    4.689    0.000    4.689    0.000 {built-in method torch.swapaxes}
+   570000    4.537    0.000    4.537    0.000 {method 'addcdiv_' of 'torch._C._TensorBase' objects}
+   570000    4.158    0.000    4.158    0.000 {method 'addcmul_' of 'torch._C._TensorBase' objects}
+    30000    0.374    0.000    3.905    0.000 batchnorm.py:134(forward)
+  1935000    3.585    0.000    3.585    0.000 {built-in method numpy.array}
+ 38716881    3.497    0.000    3.497    0.000 {method 'append' of 'list' objects}
+   569962    3.340    0.000    3.340    0.000 {method 'zero_' of 'torch._C._TensorBase' objects}
+    30000    0.260    0.000    2.726    0.000 functional.py:2407(batch_norm)
+   120000    2.427    0.000    2.427    0.000 {method 'index_select' of 'torch._C._TensorBase' objects}
+    30000    0.112    0.000    2.415    0.000 rnn.py:187(_packed_sequence_init)
+    90000    0.668    0.000    2.268    0.000 rnn.py:156(_packed_sequence_init_args)
+    30000    2.198    0.000    2.198    0.000 {built-in method torch.batch_norm}
+  3989886    1.694    0.000    2.094    0.000 _tensor.py:1071(grad)
+  4680000    2.040    0.000    2.040    0.000 {method 'size' of 'torch._C._TensorBase' objects}
+   120000    0.203    0.000    1.683    0.000 _ops.py:138(__call__)
+  1560000    0.880    0.000    1.666    0.000 rnn.py:223(check_hidden_size)
+  1530000    0.461    0.000    1.664    0.000 rnn.py:699(permute_hidden)
+    60000    0.407    0.000    1.654    0.000 profiler.py:445(__enter__)
+    30000    0.226    0.000    1.600    0.000 rnn.py:198(invert_permutation)
+  4155000    1.447    0.000    1.447    0.000 {built-in method builtins.isinstance}
+    30000    1.412    0.000    1.412    0.000 {method 'cpu' of 'torch._C._TensorBase' objects}
+    15000    0.047    0.000    1.307    0.000 loss.py:529(forward)
+   780000    1.119    0.000    1.300    0.000 rnn.py:209(get_expected_hidden_size)
+    15000    0.145    0.000    1.260    0.000 functional.py:3252(mse_loss)
+   780000    0.833    0.000    1.249    0.000 rnn.py:198(check_input)
+    30000    1.241    0.000    1.241    0.000 {built-in method torch.sort}
+    30038    1.238    0.000    1.238    0.000 {built-in method torch.tensor}
+    60000    0.056    0.000    1.203    0.000 rnn.py:20(apply_permutation)
+    15000    0.046    0.000    1.134    0.000 {method 'mean' of 'numpy.ndarray' objects}
+    60000    1.122    0.000    1.122    0.000 {built-in method torch._ops.profiler._record_function_enter}
+   855000    0.691    0.000    1.051    0.000 _VF.py:25(__getattr__)
+  6839924    1.006    0.000    1.006    0.000 {built-in method torch._C._has_torch_function_unary}
+    15000    0.867    0.000    0.867    0.000 {built-in method torch._C._nn.mse_loss}
+   780000    0.620    0.000    0.809    0.000 rnn.py:675(get_expected_cell_size)
+  3090000    0.779    0.000    0.779    0.000 {method 'dim' of 'torch._C._TensorBase' objects}
+    30000    0.224    0.000    0.762    0.000 __init__.py:30(_make_grads)
+    45000    0.684    0.000    0.684    0.000 {built-in method torch.ones_like}
+  3870000    0.666    0.000    0.666    0.000 {built-in method builtins.issubclass}
+    60000    0.306    0.000    0.660    0.000 rnn.py:63(__new__)
+  1995000    0.645    0.000    0.645    0.000 {built-in method builtins.hasattr}
+    60000    0.192    0.000    0.629    0.000 profiler.py:449(__exit__)
+  1560000    0.619    0.000    0.619    0.000 {built-in method torch._C._has_torch_function}
+    30000    0.562    0.000    0.562    0.000 {built-in method torch.arange}
+  1935000    0.487    0.000    0.487    0.000 {built-in method numpy.core._multiarray_umath.normalize_axis_index}
+    45000    0.408    0.000    0.408    0.000 {built-in method torch.as_tensor}
+   570038    0.223    0.000    0.386    0.000 _tensor.py:731(__hash__)
+    15000    0.383    0.000    0.383    0.000 {method 'mean' of 'torch._C._TensorBase' objects}
+    15076    0.381    0.000    0.381    0.000 {built-in method torch.zeros_like}
+    15000    0.376    0.000    0.376    0.000 {built-in method torch.sum}
+   885000    0.372    0.000    0.372    0.000 {built-in method builtins.getattr}
+    60000    0.359    0.000    0.359    0.000 {built-in method torch._ops.profiler._record_function_exit}
+    30000    0.172    0.000    0.349    0.000 optimizer.py:84(_cuda_graph_capture_health_check)
+  1920000    0.348    0.000    0.348    0.000 fromnumeric.py:3308(_mean_dispatcher)
+    15000    0.328    0.000    0.328    0.000 {built-in method torch.mean}
+    15000    0.305    0.000    0.305    0.000 {method 'astype' of 'numpy.ndarray' objects}
+  1935000    0.304    0.000    0.304    0.000 {built-in method numpy.asanyarray}
+    30000    0.060    0.000    0.279    0.000 grad_mode.py:82(clone)
+   569962    0.254    0.000    0.254    0.000 {method 'requires_grad_' of 'torch._C._TensorBase' objects}
+   570000    0.239    0.000    0.239    0.000 {method 'conj' of 'torch._C._TensorBase' objects}
+    15000    0.234    0.000    0.234    0.000 {method 'clone' of 'torch._C._TensorBase' objects}
+    30000    0.115    0.000    0.233    0.000 grad_mode.py:131(__enter__)
+    30000    0.204    0.000    0.218    0.000 grad_mode.py:126(__init__)
+    30000    0.214    0.000    0.214    0.000 {built-in method torch.empty_like}
+    15000    0.076    0.000    0.202    0.000 functional.py:44(broadcast_tensors)
+    30000    0.100    0.000    0.190    0.000 grad_mode.py:135(__exit__)
+    60000    0.152    0.000    0.186    0.000 grad_mode.py:226(__init__)
+    30000    0.133    0.000    0.182    0.000 adam.py:198(<listcomp>)
+    30000    0.133    0.000    0.147    0.000 functional.py:2390(_verify_batch_size)
+    30000    0.146    0.000    0.146    0.000 {method 'numpy' of 'torch._C._TensorBase' objects}
+    30000    0.059    0.000    0.125    0.000 __init__.py:77(is_available)
+   570000    0.116    0.000    0.116    0.000 {built-in method math.sqrt}
+   570040    0.110    0.000    0.110    0.000 {built-in method builtins.id}
+    60000    0.058    0.000    0.109    0.000 <string>:1(<lambda>)
+    15000    0.102    0.000    0.102    0.000 {method 'detach' of 'torch._C._TensorBase' objects}
+    15000    0.099    0.000    0.099    0.000 {built-in method torch.broadcast_tensors}
+   630000    0.096    0.000    0.096    0.000 {built-in method builtins.len}
+    30002    0.075    0.000    0.075    0.000 {method 'format' of 'str' objects}
+    30000    0.047    0.000    0.067    0.000 batchnorm.py:296(_check_input_dim)
+    30000    0.036    0.000    0.062    0.000 __init__.py:31(__get__)
+    60000    0.051    0.000    0.051    0.000 {built-in method __new__ of type object at 0xafa2c0}
+    30000    0.043    0.000    0.043    0.000 {built-in method torch._C._cuda_getDeviceCount}
+    30000    0.026    0.000    0.041    0.000 graphs.py:18(is_current_stream_capturing)
+    90000    0.039    0.000    0.039    0.000 {built-in method torch.is_grad_enabled}
+    60000    0.036    0.000    0.036    0.000 {method 'numel' of 'torch._C._TensorBase' objects}
+    30000    0.026    0.000    0.026    0.000 {built-in method torch._C._get_cudnn_enabled}
+    30000    0.024    0.000    0.024    0.000 __init__.py:77(_tensor_or_tensors_to_tuple)
+    30000    0.020    0.000    0.020    0.000 {method 'get' of 'dict' objects}
+    45000    0.019    0.000    0.019    0.000 {built-in method torch._C._has_torch_function_variadic}
+    60000    0.017    0.000    0.017    0.000 {built-in method torch._C._set_grad_enabled}
+    30000    0.015    0.000    0.015    0.000 {built-in method builtins.all}
+    30000    0.014    0.000    0.014    0.000 {built-in method torch._C._cuda_isCurrentStreamCapturing}
+    15000    0.014    0.000    0.014    0.000 _reduction.py:7(get_enum)
+    30000    0.014    0.000    0.014    0.000 _jit_internal.py:958(is_scripting)
+    15000    0.009    0.000    0.009    0.000 {method 'disable' of '_lsprof.Profiler' objects}
         2    0.000    0.000    0.000    0.000 _ops.py:188(__getattr__)
         2    0.000    0.000    0.000    0.000 {built-in method torch._C._jit_get_operation}
         2    0.000    0.000    0.000    0.000 _builtins.py:158(_register_builtin)
         1    0.000    0.000    0.000    0.000 _ops.py:223(__getattr__)
-        1    0.000    0.000    0.000    0.000 _ops.py:184(__init__)
         2    0.000    0.000    0.000    0.000 _ops.py:73(__init__)
+        1    0.000    0.000    0.000    0.000 _ops.py:184(__init__)
         2    0.000    0.000    0.000    0.000 _builtins.py:128(_get_builtin_table)
         3    0.000    0.000    0.000    0.000 {built-in method builtins.setattr}
 
