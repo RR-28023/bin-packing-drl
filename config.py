@@ -14,7 +14,7 @@ parameters_definition = {
     "min_num_items": { "value": 3, "type": int, "desc": "Minimum number of items"},
     "max_num_items": { "value": 50, "type": int, "desc": "Maximum number of items"},
     "bin_size": { "value": 15, "type": int, "desc": "Bin size"},
-    "agent_heuristic": {"value": "FF", "type": str, "desc": "Heursitic used by the agent to allocate the sequence output"},
+    "agent_heuristic": {"value": "NF", "type": str, "desc": "Heursitic used by the agent to allocate the sequence output"},
 
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
@@ -26,7 +26,7 @@ parameters_definition = {
     "hid_dim": { "value": 64, "type": int, "desc": "Hidden dimension"},
 
     # RUN OPTIONS #
-    "device": { "value": "cuda:0", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
+    "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
     "inference_only": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "model_path": { "value": None, "type": str, "desc": "If inference_only, path to the model ckpt to use"},
 
