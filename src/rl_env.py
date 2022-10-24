@@ -1,6 +1,47 @@
+"""
+Logic to generate new states and compute the reward for each state-action pair.
+"""
+
 import numpy as np
 from torch import dtype
 
+class StatesGenerator(object):
+    """
+    Helper class used to randomly generate batches of states given a set
+    of problem conditions, which are provided via the `config` object.
+    """
+
+    def __init__(self, config):
+        self.batch_size = config.batch_size
+        self.min_num_items = config.min_num_items
+        self.max_num_items = config.max_num_items
+        self.min_item_size = config.min_item_size
+        self.max_item_size = config.max_item_size
+
+    def generate_states_batch(self, batch_size=None):
+        """Generate new batch of initial states"""
+        if batch_size is None:
+            batch_size = self.batch_size
+        items_seqs_batch = np.random.randint(
+            low=self.min_item_size,
+            high=self.max_item_size + 1,
+            size=(batch_size, self.max_num_items),
+        )
+        items_len_mask = np.ones_like(items_seqs_batch, dtype="float32")
+        items_seq_lens = np.random.randint(
+            low=self.min_num_items, high=self.max_num_items + 1, size=batch_size
+        )
+        for items_seq, len_mask, seq_len in zip(
+            items_seqs_batch, items_len_mask, items_seq_lens
+        ):
+            items_seq[seq_len:] = 0
+            len_mask[seq_len:] = 0
+
+        return (
+            items_seqs_batch,
+            items_seq_lens,
+            items_len_mask,
+        )
 
 def avg_occupancy(
     bin_size: int, items_size: tuple[float], items_order: tuple[int], heuristic: str
@@ -37,7 +78,6 @@ def avg_occupancy(
 
     return np.mean(np.array(bins) / bin_size)
 
-
 def compute_reward(config, states_batch, len_mask, actions_batch):
     """
     Compute the average occupancy ratio for each state-action pair in the batch.
@@ -50,7 +90,6 @@ def compute_reward(config, states_batch, len_mask, actions_batch):
         avg_occupancy_ratios.append(avg_occupancy(bin_size, states, actions, heuristic=config.agent_heuristic))
 
     return np.array(avg_occupancy_ratios)
-
 
 def get_benchmark_rewards(config, states_generator):
     nf_reward, ff_reward, ffd_reward = [], [], []
