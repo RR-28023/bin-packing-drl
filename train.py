@@ -57,7 +57,7 @@ def train(profiler):
                     [ff_reward] * config.n_episodes,
                     [ffd_reward] * config.n_episodes,
                 ],
-                ["DRL Agent + NF", "NF", "FF", "FFD"],
+                [f"DRL Agent + {config.agent_heuristic}", "NF", "FF", "FFD"],
                 outfilepath="./train_hist.png",
                 moving_avg_window=100,
             )

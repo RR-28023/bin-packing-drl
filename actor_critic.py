@@ -34,20 +34,21 @@ class Actor:
 
     def reinforce_step(self, states_batch, states_len, len_mask, verbose=False):
 
-        states_batch = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
-        len_mask = torch.tensor(len_mask, dtype=torch.int32).to(self.device)
+        states_batch_dev = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
+        len_mask = torch.as_tensor(len_mask) # .to(self.device)
+        len_mask_device = len_mask.to(self.device)
 
         self.optimizer_actor.zero_grad()
-        log_probs_actions, actions = self.policy_dnn(states_batch, states_len, len_mask)
+        log_probs_actions, actions = self.policy_dnn(states_batch_dev, states_len, len_mask, len_mask_device)
         log_prob_seq = torch.sum(
             log_probs_actions, dim=1
         )  # Equivalent to multiplying probs
         # log_prob_seq is now the log prob of having taken action A under policy pi. i.e. pi(At|St).
         
         self.optimizer_critic.zero_grad()
-        pred_reward = self.critic_dnn(states_batch, states_len, len_mask)
+        pred_reward = self.critic_dnn(states_batch_dev, states_len, len_mask_device)
 
-        real_reward = compute_reward(self.config, states_batch.detach().cpu(), len_mask.detach().cpu(), actions.detach().cpu())
+        real_reward = compute_reward(self.config, states_batch, len_mask, actions)
         real_reward = torch.tensor(real_reward, dtype=torch.float32, requires_grad=False).to(self.device)
         critic_loss = self.critic_loss_fn(
             real_reward, pred_reward
