@@ -1,4 +1,5 @@
 import numpy as np
+from torch import dtype
 
 
 def avg_occupancy(
@@ -42,8 +43,8 @@ def compute_reward(config, states_batch, len_mask, actions_batch):
     Compute the average occupancy ratio for each state-action pair in the batch.
     """
     bin_size = config.bin_size
-    states_batch = states_batch.squeeze(-1).numpy()
-    actions_batch = actions_batch.numpy()
+    # states_batch = states_batch.squeeze(-1).numpy()
+    actions_batch = actions_batch.numpy().astype(int)
     avg_occupancy_ratios = []
     for states, actions in zip(states_batch, actions_batch):
         avg_occupancy_ratios.append(avg_occupancy(bin_size, states, actions, heuristic=config.agent_heuristic))

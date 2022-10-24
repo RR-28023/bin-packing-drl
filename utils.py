@@ -30,7 +30,7 @@ class StatesGenerator(object):
             high=self.max_item_size + 1,
             size=(batch_size, self.max_num_items),
         )
-        items_len_mask = np.ones_like(items_seqs_batch, dtype="int32")
+        items_len_mask = np.ones_like(items_seqs_batch, dtype="float32")
         items_seq_lens = np.random.randint(
             low=self.min_num_items, high=self.max_num_items + 1, size=batch_size
         )

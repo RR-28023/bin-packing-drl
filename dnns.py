@@ -106,8 +106,11 @@ class ActorPointerNetwork(nn.Module):
         )
         self.attention = BahdanauAttention(config.hid_dim)
         self.max_len = config.max_num_items
+        # Initial input to pass to the decoder:
+        self.dec_input = -1 * torch.ones(config.batch_size, 1, 1).to(config.device)
+        self.device = config.device         
 
-    def forward(self, states_batch, states_lens, len_mask):
+    def forward(self, states_batch, states_lens, len_mask, len_mask_device):
         from copy import deepcopy
 
         input_embedded = self.embedding(
@@ -122,10 +125,10 @@ class ActorPointerNetwork(nn.Module):
         enc_output = pad_packed_sequence(
             enc_output, batch_first=True, total_length=len_mask.shape[-1]
         )[0]
-        dec_input = -1 * torch.ones(states_batch.shape[0], 1, 1)
-        pointer_mask = len_mask.clone()
-        actions_seq = -1 * torch.ones_like(pointer_mask)
-        actions_log_probs = torch.zeros_like(pointer_mask, dtype=torch.float32)
+        dec_input = self.dec_input
+        pointer_mask = len_mask_device.clone()
+        actions_seq = -1 * torch.ones_like(len_mask)
+        actions_log_probs = torch.zeros_like(len_mask_device, dtype=torch.float32)
         for i in range(self.max_len):
             dec_output, (h_state, c_state) = self.decoder(dec_input, (h_state, c_state))
             probs, log_probs = self.attention(
@@ -144,10 +147,10 @@ class ActorPointerNetwork(nn.Module):
             dec_input = (
                 selected_item.unsqueeze(-1)
                 .unsqueeze(-1)
-                .clone()
-                .detach()
+                #.clone()
+                #.detach()
                 .to(torch.float32)
             )
-        actions_log_probs = actions_log_probs*len_mask
+        actions_log_probs = actions_log_probs*len_mask_device
         actions_seq = actions_seq*len_mask - (1 - len_mask)
         return actions_log_probs, actions_seq
