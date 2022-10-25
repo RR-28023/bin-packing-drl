@@ -67,7 +67,7 @@ def train(config):
 
 
     # Save key training metrics
-    if not os.path.isfile(".experiments/experiments.csv"):
+    if not os.path.isfile("./experiments/experiments.csv"):
         col_headers = list(vars(config).keys())
         col_headers.extend(["agent_reward", "nf_reward", "ff_reward", "ffd_reward"])
         with open(".experiments/experiments.csv", "w") as f:
@@ -82,7 +82,7 @@ def train(config):
 
     # Save trained actor model
     if config.model_path:
-        torch.save(agent.policy_dnn, "./experiments/policy_dnn.pkl")
+        torch.save(agent.policy_dnn, config.model_path)
     
 if __name__ == "__main__":
 

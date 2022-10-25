@@ -32,6 +32,7 @@ class Actor:
         self.critic_loss_fn = nn.MSELoss()
         self.critic_dnn.to(self.device)
 
+    
     def reinforce_step(self, states_batch, states_len, len_mask):
 
         states_batch_dev = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
@@ -66,3 +67,16 @@ class Actor:
         self.optimizer_actor.step()
 
         return real_reward.mean().cpu(), pred_reward.cpu().numpy().mean()
+
+    
+    def apply_policy(self, states_batch, states_len, len_mask):
+        
+        states_batch_dev = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
+        len_mask = torch.as_tensor(len_mask)
+        len_mask_device = len_mask.to(self.device) # Keep one in device and other in cpu 
+        # to minimize cpu-gpu exchanges (since len_mask is used in cpu-only functions as well) 
+
+        # Compute actions (i.e. sequence in which items are allocated to bins)
+        actions = self.policy_dnn.inference(states_batch_dev, states_len, len_mask, len_mask_device)
+
+        return actions

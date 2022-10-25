@@ -111,9 +111,29 @@ class ActorPointerNetwork(nn.Module):
 
     def forward(self, states_batch, states_lens, len_mask, len_mask_device):
 
-        input_embedded = self.embedding(
-            states_batch
-        )  # (batch_size, max_seq_len, hid_dim)
+        enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, actions_log_probs = self.encode_inputs(
+            states_batch, states_lens, len_mask, len_mask_device
+        )
+
+        for i in range(self.max_len):
+            _, (h_state, c_state) = self.decoder(dec_input, (h_state, c_state))
+            probs, log_probs = self.attention(enc_output, h_state, pointer_mask)  # (B, L)
+            selected_item = torch.multinomial(probs, 1).squeeze(1)  # (batch_size)
+            pointer_mask = pointer_mask.scatter_(1, selected_item.unsqueeze(-1), 0)
+            log_prob_selected_item = torch.gather(log_probs, 1, selected_item.unsqueeze(-1)).squeeze(1)
+            actions_seq[:, i] = selected_item
+            actions_log_probs[:, i] = log_prob_selected_item
+            dec_input = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)
+            
+        
+        actions_log_probs = actions_log_probs*len_mask_device
+        actions_seq = actions_seq*len_mask - (1 - len_mask)
+        return actions_log_probs, actions_seq
+
+
+    def encode_inputs(self, states_batch, states_lens, len_mask, len_mask_device):
+        
+        input_embedded = self.embedding(states_batch)  # (batch_size, max_seq_len, hid_dim)
         input_embedded_norm = self.batch_norm(torch.swapaxes(input_embedded, 1, 2))
         input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)  # (B, L, H)
         input_embedded_masked = pack_padded_sequence(
@@ -127,26 +147,23 @@ class ActorPointerNetwork(nn.Module):
         pointer_mask = len_mask_device.clone()
         actions_seq = -1 * torch.ones_like(len_mask)
         actions_log_probs = torch.zeros_like(len_mask_device, dtype=torch.float32)
+        
+        return  enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, actions_log_probs
+
+
+    @torch.inference_mode()
+    def inference(self, states_batch, states_lens, len_mask, len_mask_device):
+        
+        enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, _ = self.encode_inputs(
+            states_batch, states_lens, len_mask, len_mask_device
+        )
         for i in range(self.max_len):
-            dec_output, (h_state, c_state) = self.decoder(dec_input, (h_state, c_state))
-            probs, log_probs = self.attention(
-                enc_output, h_state, pointer_mask
-            )  # (B, L)
-            selected_item = torch.multinomial(probs, 1).squeeze(1)  # (batch_size)
-
+            _, (h_state, c_state) = self.decoder(dec_input, (h_state, c_state))
+            probs, _ = self.attention(enc_output, h_state, pointer_mask)  # (B, L)
+            selected_item = torch.argmax(probs, axis=1)  # (batch_size)
             pointer_mask = pointer_mask.scatter_(1, selected_item.unsqueeze(-1), 0)
-
-            log_prob_selected_item = torch.gather(
-                log_probs, 1, selected_item.unsqueeze(-1)
-            ).squeeze(1)
             actions_seq[:, i] = selected_item
-            actions_log_probs[:, i] = log_prob_selected_item
-
-            dec_input = (
-                selected_item.unsqueeze(-1)
-                .unsqueeze(-1)
-                .to(torch.float32)
-            )
-        actions_log_probs = actions_log_probs*len_mask_device
+            dec_input = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)            
+        
         actions_seq = actions_seq*len_mask - (1 - len_mask)
-        return actions_log_probs, actions_seq
+fac        return actions_seq
