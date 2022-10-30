@@ -114,5 +114,6 @@ by the heuristic itself. Hence, it would be interesting to try a different archi
 directly outputs the bin to which each item is packed, and see if it gets better results. 
 
 # References
-*Neural Combinatorial Optimization with Reinforcement Learning*; Irwan Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, Samy Bengio; ICLR 2017 [link](https://arxiv.org/abs/1611.09940)
-*Pointer Networks*; Oriol Vinyals, Meire Fortunato, Navdeep Jaitly; [link](https://arxiv.org/pdf/1506.03134.pdf)
+* *Neural Combinatorial Optimization with Reinforcement Learning*; Irwan Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, Samy Bengio; ICLR 2017 [link](https://arxiv.org/abs/1611.09940)
+
+* *Pointer Networks*; Oriol Vinyals, Meire Fortunato, Navdeep Jaitly; [link](https://arxiv.org/pdf/1506.03134.pdf)
