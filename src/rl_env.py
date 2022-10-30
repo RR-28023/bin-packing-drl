@@ -91,23 +91,38 @@ def compute_reward(config, states_batch, len_mask, actions_batch):
 
     return np.array(avg_occupancy_ratios)
 
-def get_benchmark_rewards(config, states_generator):
+def get_benchmark_rewards(config, states_generator: StatesGenerator=None, states_batch=None):
+    """
+    Compute the average occupancy ratio following the NF, FF and FFD heuristics. 
+    
+    If the arg `states_generator` is provided, the states (i.e. sequences of items to allocate) are randomly
+    generated during 1,000 loops and the retruend values are the average.
+    If no `states_generator`arg is provided and a `states_batch` arg is provided, then the average 
+    occupancy ratio is computed for the provided batch.
+
+    Returns a tuple with 3 values corresponding to the average occupancy ratio obtained following
+    a NF, FF and FFD heuristic respectively.
+    """
     nf_reward, ff_reward, ffd_reward = [], [], []
-    items_order_default = np.arange(config.max_num_items)
-    for _ in range(10000):
+    if states_generator is not None:
         states, states_lens, len_mask = states_generator.generate_states_batch(
-            batch_size=1
+            batch_size=10000
         )
+    else:
+        states = states_batch
+
+    items_order_default = np.arange(config.max_num_items)
+    for state in states:
 
         nf_reward.append(
-            avg_occupancy(config.bin_size, states[0], items_order_default, heuristic="NF")
+            avg_occupancy(config.bin_size, state, items_order_default, heuristic="NF")
         )
         ff_reward.append(
-            avg_occupancy(config.bin_size, states[0], items_order_default, heuristic="FF")
+            avg_occupancy(config.bin_size, state, items_order_default, heuristic="FF")
         )
-        items_order_decreasing = np.flip(np.argsort(states[0]))
+        items_order_decreasing = np.flip(np.argsort(state))
         ffd_reward.append(
-            avg_occupancy(config.bin_size, states[0], items_order_decreasing, heuristic="FF")
+            avg_occupancy(config.bin_size, state, items_order_decreasing, heuristic="FF")
         )
 
     return np.mean(nf_reward), np.mean(ff_reward), np.mean(ffd_reward)

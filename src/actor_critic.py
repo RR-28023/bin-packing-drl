@@ -17,19 +17,21 @@ class Actor:
         
         # Initialize actor network and training artifacts
         self.policy_dnn = ActorPointerNetwork(config)
-        self.optimizer_actor = optim.Adam(self.policy_dnn.parameters(), lr=config.lr)
-        self.lr_scheduler_actor = optim.lr_scheduler.ExponentialLR(
-            self.optimizer_actor, 0.9, verbose=True
-        )
+        if not config.inference:
+            self.optimizer_actor = optim.Adam(self.policy_dnn.parameters(), lr=config.lr)
+            self.lr_scheduler_actor = optim.lr_scheduler.ExponentialLR(
+                self.optimizer_actor, 0.9, verbose=True
+            )
         self.policy_dnn.to(self.device)
 
         # Initialize critic network and training artifacts
         self.critic_dnn = CriticNetwork(config)
-        self.optimizer_critic = optim.Adam(self.critic_dnn.parameters(), lr=config.lr)
-        self.lr_scheduler_critic = optim.lr_scheduler.ExponentialLR(
-            self.optimizer_critic, 0.9, verbose=True
-        )
-        self.critic_loss_fn = nn.MSELoss()
+        if not config.inference:
+            self.optimizer_critic = optim.Adam(self.critic_dnn.parameters(), lr=config.lr)
+            self.lr_scheduler_critic = optim.lr_scheduler.ExponentialLR(
+                self.optimizer_critic, 0.9, verbose=True
+            )
+            self.critic_loss_fn = nn.MSELoss()
         self.critic_dnn.to(self.device)
 
     
@@ -79,4 +81,4 @@ class Actor:
         # Compute actions (i.e. sequence in which items are allocated to bins)
         actions = self.policy_dnn.inference(states_batch_dev, states_len, len_mask, len_mask_device)
 
-        return actions
+        return actions.type(torch.int32)

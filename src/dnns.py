@@ -166,4 +166,4 @@ class ActorPointerNetwork(nn.Module):
             dec_input = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)            
         
         actions_seq = actions_seq*len_mask - (1 - len_mask)
-fac        return actions_seq
+        return actions_seq
