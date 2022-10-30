@@ -31,7 +31,7 @@ parameters_definition = {
 
     # RUN OPTIONS #
     "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
-    "inference": {"value": True, "type": str2bool, "desc": "Do not train the model"},
+    "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "model_path": {
         "value": "./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl", 
         "type": str, 

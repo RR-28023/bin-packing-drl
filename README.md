@@ -45,7 +45,7 @@ conditions (plus all the defaults in the `config.py`)
 Using a **Next-Fit** heuristic to pack the items in the order given by the pointer network:
 
 ```
-python3 src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --max_num_items 10 --bin_size 1000 --agent_heuristic NF --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_NF.pkl
+python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --max_num_items 10 --bin_size 1000 --agent_heuristic NF --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_NF.pkl
 ```
 
 Results:
@@ -56,7 +56,7 @@ Results:
 Using a **First-Fit** heuristic to pack the items in the order given by the pointer network:
 
 ```
-python3 src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --max_num_items 10 --bin_size 1000 --agent_heuristic FF --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl
+python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --max_num_items 10 --bin_size 1000 --agent_heuristic FF --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl
 ```
 
 Results:
@@ -66,10 +66,12 @@ Results:
 
 ## Run inference on sets of items
 
-The model from the example above could then be used to pack the sets of items in 
-`inference_data\input_states.txt` by running:
+The models from the examples above could then be used to pack the sets of items given by 
+`inference_data\input_states.txt`. For example:
 
-
+```
+python src/main.py --inference=True --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl --inference_data_path ./experiments/inference_data/input_states.txt --agent_heuristic FF --max_num_items=10
+```
 
 
 # Further work
