@@ -8,9 +8,9 @@ def plot_training_history(
     data: list[list[float]],
     labels: list[str],
     moving_avg_window: int = 0,
-    outfilepath: str = "./train_hist.png",
+    outfilepath: str = "./experiments/train_hist.png",
 ):
-    plt.style.use("./tseries.mplstyle")
+    plt.style.use("./src/tseries.mplstyle")
     fig, line_ax = plt.subplots(1, 1)
 
     # Set titles and subtitles

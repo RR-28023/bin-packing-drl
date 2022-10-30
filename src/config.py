@@ -9,11 +9,11 @@ def str2bool(v):
 parameters_definition = {
 
     # PROBLEM CONDITIONS #
-    "min_item_size": { "value": 1, "type": int, "desc": "Minimum item size"},
-    "max_item_size": { "value": 6, "type": int, "desc": "Maximum item size"},
-    "min_num_items": { "value": 24, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": { "value": 24, "type": int, "desc": "Maximum number of items"},
-    "bin_size": { "value": 8, "type": int, "desc": "Bin size"},
+    "min_item_size": { "value": 200, "type": int, "desc": "Minimum item size"},
+    "max_item_size": { "value": 600, "type": int, "desc": "Maximum item size"},
+    "min_num_items": { "value": 100, "type": int, "desc": "Minimum number of items"},
+    "max_num_items": { "value": 300, "type": int, "desc": "Maximum number of items"},
+    "bin_size": { "value": 1000, "type": int, "desc": "Bin size"},
     "agent_heuristic": {
         "value": "FF", 
         "type": str, 
@@ -22,7 +22,7 @@ parameters_definition = {
 
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
-    "n_episodes": { "value": 10, "type": int, "desc": "Number of episodes"},
+    "n_episodes": { "value": 4000, "type": int, "desc": "Number of episodes"},
     "batch_size": { "value": 128, "type": int, "desc": "Batch size"},
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
 
@@ -31,9 +31,9 @@ parameters_definition = {
 
     # RUN OPTIONS #
     "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
-    "inference": {"value": True, "type": str2bool, "desc": "Do not train the model"},
+    "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "model_path": {
-        "value": "./experiments/models/policy_dnn_problem1_FF.pkl", 
+        "value": "./experiments/models/policy_dnn_200_600_100_300_1000.pkl", 
         "type": str, 
         "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"
     },

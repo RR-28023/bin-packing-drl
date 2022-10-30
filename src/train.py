@@ -46,7 +46,7 @@ def train(config):
             f"Critic pred. reward: {predicted_reward:.1%}"
         )
         
-        if i % 1000 == 0 and i > 0:
+        if (i % 1000 == 0 and i > 0) or i == config.n_episodes - 1:
             # Decay learning rate
             agent.lr_scheduler_actor.step()
             agent.lr_scheduler_critic.step()
