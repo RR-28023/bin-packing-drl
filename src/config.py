@@ -31,14 +31,14 @@ parameters_definition = {
 
     # RUN OPTIONS #
     "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
-    "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
+    "inference": {"value": True, "type": str2bool, "desc": "Do not train the model"},
     "model_path": {
         "value": "./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl", 
         "type": str, 
         "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"
     },
     "inference_data_path": {
-        "value": None, #"./experiments/inference_data/problem1_states.json",
+        "value": "./experiments/inference_data/input_states.txt",
         "type": str,
         "desc": "Path to the inference data. If None, a random batch of states will be generated according to the config parameters"
     }
