@@ -25,7 +25,6 @@ grid.color: A5A5A5            # grid color
 axes.axisbelow: True            # Sets axis gridlines below lines and patches.
 
 # Setting fonts and fonts spacing
-font.family: Roboto
 font.size: 12                   # default font size for text, given in points.
 # axes.labelsize: 10              # font size of the x and y labels
 
