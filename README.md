@@ -1,3 +1,5 @@
+# Overview
+
 Solve the [1D Bin Packing Problem](https://en.wikipedia.org/wiki/Bin_packing_problem) 
 using Deep Reinforcement Learning and Pointer Networks.
 
@@ -16,9 +18,18 @@ size in the best possible way, but also it can learn to deal with a variable num
 items (i.e. the same DNN can be used ot allocate a set of 10 items than a set of 30 items, 
 as long as both sizes are considered during training).
 
+This implementation was used in my master's thesis to decide which tasks allocate to which nodes 
+in a Distributed Embedded System, in a way that minimizes the number of active nodes 
+(it is essentially the same problem).
+
+![](imgs/nodemanager.png)
+
+
 This implementation also compares the results of using the DRL approach 
 with those that would have been obtained by following a Next-Fit, First-Fit and 
 First-Fit-Decreasing heuristic. 
+
+![](imgs/heuristics.png)
 
 # Usage
 
@@ -50,7 +61,9 @@ python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --m
 
 Results:
 
-<center><img src="experiments/DRL_Agent_NF.png" width="400"></center>
+<div style="text-align:center">
+<img src="experiments/DRL_Agent_NF.png" width="400">
+</div>
 
 
 Using a **First-Fit** heuristic to pack the items in the order given by the pointer network:
@@ -61,7 +74,9 @@ python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --m
 
 Results:
 
-<center><img src="experiments/DRL_Agent_FF.png" width="400"></center>
+<div style="text-align:center">
+<img src="experiments/DRL_Agent_FF.png" width="400">
+</div>
 
 
 ## Run inference on sets of items
@@ -73,10 +88,10 @@ The models from the examples above could then be used to pack the sets of items 
 python src/main.py --inference=True --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl --inference_data_path ./experiments/inference_data/input_states.txt --agent_heuristic FF --max_num_items=10
 ```
 
-
 # Further work
 
-
-
-
-
+The current approach follows the approach in the references which is to output a sequence
+"pointing" to positions in the input. Hence the need to follow an allocation heuristic
+(either NF or FF) to then pack that sequence. The optimality of the solution might be limited
+by the heuristic itself. Hence, it would be interesting to try a different architecture that
+directly outputs the bin to which each item is packed, and see if it gets better results. 
