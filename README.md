@@ -43,7 +43,7 @@ quite cheap in terms of memory and speed.
 Average Occupancy Ratio when the agent uses a NF heuristic to pack the items in the order 
 given by the pointer DNN: 
 
-<img align="center" src="experiments/DRL_Agent_FF.png" width="600">
+<img align="center" src="experiments/300itemsNF.png" width="600">
 
 Average Occupancy Ratio when the agent uses a FF heuristic to pack the items in the order 
 given by the pointer DNN:
