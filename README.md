@@ -22,14 +22,16 @@ This implementation was used in my master's thesis to decide which tasks allocat
 in a Distributed Embedded System, in a way that minimizes the number of active nodes 
 (it is essentially the same problem).
 
-![](imgs/nodemanager.png)
+<img align="center" src="imgs/nodemanager.png" width="400">
 
 
 This implementation also compares the results of using the DRL approach 
 with those that would have been obtained by following a Next-Fit, First-Fit and 
 First-Fit-Decreasing heuristic. 
 
-![](imgs/heuristics.png)
+<img align="center" src="imgs/heuristics.png" width="400">
+
+
 
 # Usage
 
@@ -61,9 +63,7 @@ python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --m
 
 Results:
 
-<div style="text-align:center">
-<img src="experiments/DRL_Agent_NF.png" width="400">
-</div>
+<img align="center" src="experiments/DRL_Agent_NF.png" width="400">
 
 
 Using a **First-Fit** heuristic to pack the items in the order given by the pointer network:
@@ -74,9 +74,8 @@ python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --m
 
 Results:
 
-<div style="text-align:center">
-<img src="experiments/DRL_Agent_FF.png" width="400">
-</div>
+<img align="center" src="experiments/DRL_Agent_FF.png" width="400">
+
 
 
 ## Run inference on sets of items
