@@ -31,6 +31,24 @@ First-Fit-Decreasing heuristic.
 
 <img align="center" src="imgs/heuristics.png" width="400">
 
+# Experiments
+
+The model has been tested under multiple problem conditions. The "hardest" conditions I've tried
+were sets of up to 300 items, with an item size between 200 to 600, to bins of size 1000.
+An Agent using a FF heuristic reached the same performance as the FFD heuristic in <2000 
+steps. An Agent using a NF heuristic beat the FF heuristic and got close to the FFD 
+heuristic in ~10k steps. This is perhaps more interesting since the NF heuristic is 
+quite cheap in terms of memory and speed.   
+
+Average Occupancy Ratio when the agent uses a NF heuristic to pack the items in the order 
+given by the pointer DNN: 
+
+<img align="center" src="experiments/DRL_Agent_FF.png" width="600">
+
+Average Occupancy Ratio when the agent uses a FF heuristic to pack the items in the order 
+given by the pointer DNN:
+
+<img align="center" src="experiments/300itemsFF.png" width="600">
 
 
 # Usage
@@ -63,7 +81,7 @@ python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --m
 
 Results:
 
-<img align="center" src="experiments/DRL_Agent_NF.png" width="400">
+<img align="center" src="experiments/DRL_Agent_NF.png" width="600">
 
 
 Using a **First-Fit** heuristic to pack the items in the order given by the pointer network:
@@ -74,7 +92,7 @@ python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --m
 
 Results:
 
-<img align="center" src="experiments/DRL_Agent_FF.png" width="400">
+<img align="center" src="experiments/DRL_Agent_FF.png" width="600">
 
 
 
@@ -94,3 +112,7 @@ The current approach follows the approach in the references which is to output a
 (either NF or FF) to then pack that sequence. The optimality of the solution might be limited
 by the heuristic itself. Hence, it would be interesting to try a different architecture that
 directly outputs the bin to which each item is packed, and see if it gets better results. 
+
+# References
+*Neural Combinatorial Optimization with Reinforcement Learning*; Irwan Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, Samy Bengio; ICLR 2017 [link](https://arxiv.org/abs/1611.09940)
+*Pointer Networks*; Oriol Vinyals, Meire Fortunato, Navdeep Jaitly; [link](https://arxiv.org/pdf/1506.03134.pdf)
