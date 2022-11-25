@@ -56,7 +56,7 @@ given by the pointer DNN:
 ## Install required libraries
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Train the agent
