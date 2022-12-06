@@ -17,7 +17,7 @@ parameters_definition = {
     "agent_heuristic": {
         "value": "FF", 
         "type": str, 
-        "desc": "HeuriStic used by the agent to allocate the sequence output"
+        "desc": "Heuristic used by the agent to allocate the sequence output"
     },
 
     # TRAINING PARAMETERS #
