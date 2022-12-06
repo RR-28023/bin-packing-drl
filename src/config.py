@@ -22,7 +22,7 @@ parameters_definition = {
 
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
-    "n_episodes": { "value": 1000, "type": int, "desc": "Number of episodes"},
+    "n_episodes": { "value": 10000, "type": int, "desc": "Number of episodes"},
     "batch_size": { "value": 128, "type": int, "desc": "Batch size"},
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
 
