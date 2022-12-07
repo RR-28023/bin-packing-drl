@@ -72,13 +72,17 @@ class Actor:
 
     
     def apply_policy(self, states_batch, states_len, len_mask):
+        import time
         
         states_batch_dev = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
         len_mask = torch.as_tensor(len_mask)
         len_mask_device = len_mask.to(self.device) # Keep one in device and other in cpu 
         # to minimize cpu-gpu exchanges (since len_mask is used in cpu-only functions as well) 
+        states_len = torch.as_tensor(states_len).to(self.device)
 
         # Compute actions (i.e. sequence in which items are allocated to bins)
+        t0 = time.time()
         actions = self.policy_dnn.inference(states_batch_dev, states_len, len_mask, len_mask_device)
+        t1 = time.time()
 
-        return actions.type(torch.int32)
+        return actions.type(torch.int32), t1 - t0

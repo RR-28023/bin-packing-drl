@@ -9,13 +9,13 @@ def str2bool(v):
 parameters_definition = {
 
     # PROBLEM CONDITIONS #
-    "min_item_size": { "value": 4, "type": int, "desc": "Minimum item size"},
-    "max_item_size": { "value": 14, "type": int, "desc": "Maximum item size"},
-    "min_num_items": { "value": 3, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": { "value": 50, "type": int, "desc": "Maximum number of items"},
-    "bin_size": { "value": 15, "type": int, "desc": "Bin size"},
+    "min_item_size": { "value": 3, "type": int, "desc": "Minimum item size"},
+    "max_item_size": { "value": 8, "type": int, "desc": "Maximum item size"},
+    "min_num_items": { "value": 40, "type": int, "desc": "Minimum number of items"},
+    "max_num_items": { "value": 40, "type": int, "desc": "Maximum number of items"},
+    "bin_size": { "value": 10, "type": int, "desc": "Bin size"},
     "agent_heuristic": {
-        "value": "FF", 
+        "value": "NF", 
         "type": str, 
         "desc": "Heuristic used by the agent to allocate the sequence output"
     },
@@ -23,7 +23,7 @@ parameters_definition = {
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
     "n_episodes": { "value": 10000, "type": int, "desc": "Number of episodes"},
-    "batch_size": { "value": 128, "type": int, "desc": "Batch size"},
+    "batch_size": { "value": 1000, "type": int, "desc": "Batch size"},
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
 
     # NETWORK PARAMETERS #
@@ -31,14 +31,14 @@ parameters_definition = {
 
     # RUN OPTIONS #
     "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
-    "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
+    "inference": {"value": True, "type": str2bool, "desc": "Do not train the model"},
     "model_path": {
-        "value": "./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl", 
+        "value": "./experiments/models/DRL-NF_size_size_3_8_items_40_40_bin_10_episodes_10000.pkl", 
         "type": str, 
         "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"
     },
     "inference_data_path": {
-        "value": "./experiments/inference_data/input_states.txt",
+        "value": "",
         "type": str,
         "desc": "Path to the inference data. If None, a random batch of states will be generated according to the config parameters"
     }

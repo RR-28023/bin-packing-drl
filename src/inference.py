@@ -34,28 +34,43 @@ def inference(config):
     config.batch_size = len(states_batch)
     device = config.device if torch.cuda.is_available() else "cpu"
     actor = Actor(config)
+    dec_input = actor.policy_dnn.dec_input
     actor.policy_dnn = torch.load(config.model_path, map_location=torch.device(device))
-    actor.policy_dnn.dec_input = actor.policy_dnn.dec_input[:config.batch_size]    
+    actor.policy_dnn.dec_input = dec_input
 
     # Execute model  
-    gc.disable()
+    for _ in range(3): # Warmup
+        allocation_order, elapsed_time = actor.apply_policy(
+            states_batch,
+            states_lens,
+            len_mask
+        )
+    # gc.disable()
     start = time.process_time_ns()
-    allocation_order = actor.apply_policy(
+    allocation_order, elapsed_time = actor.apply_policy(
         states_batch,
         states_lens,
         len_mask
     )
     middle = time.process_time_ns()
+    middle_v2 = time.time()
     avg_occ_ratio = compute_reward(config, states_batch, len_mask, allocation_order).mean()
     end = time.process_time_ns()
-    gc.enable()
+    end_v2 = time.time()
+    # gc.enable()
 
     model_mean_time_ms = (end - start) / len(states_batch) / 1000000
     drl_mean_time_ms   = (middle - start) / len(states_batch) / 1000000
+    drl_mean_time_ms_v2   = elapsed_time * 1e3 / len(states_batch)
     order_mean_time_ms = (end - middle) / len(states_batch) / 1000000
+    order_mean_time_ms_v2 = (end_v2 - middle_v2) * 1e3 / len(states_batch)
 
     str = f"Average occupancy ratio with RL+{config.agent_heuristic} agent: {avg_occ_ratio:.1%} "
     str += f"({model_mean_time_ms} ms = {drl_mean_time_ms} ms + {order_mean_time_ms} ms)"
+    print(str)
+    print(f"\nVersion with time.time():")
+    str = f"Average occupancy ratio with RL+{config.agent_heuristic} agent: {avg_occ_ratio:.1%} "
+    str += f"({drl_mean_time_ms_v2 + order_mean_time_ms_v2} ms = {drl_mean_time_ms_v2} ms + {order_mean_time_ms_v2} ms)\n"
     print(str)
 
     # Execute heuristics

@@ -152,6 +152,7 @@ class ActorPointerNetwork(nn.Module):
 
 
     @torch.inference_mode()
+    @torch.no_grad()
     def inference(self, states_batch, states_lens, len_mask, len_mask_device):
         
         enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, _ = self.encode_inputs(
