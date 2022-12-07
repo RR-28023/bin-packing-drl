@@ -4,11 +4,15 @@ from rl_env import StatesGenerator, get_benchmark_rewards, compute_reward
 import ast
 import numpy as np
 
+import time
+import gc
+
 @torch.inference_mode()
 def inference(config):
 
     # Generate states
     if config.inference_data_path:
+        print("Opening file {config.inference_data_path}")
         with open(config.inference_data_path, "r") as f:
             states_batch = [ast.literal_eval(line.rstrip()) for line in f]
         
@@ -22,6 +26,7 @@ def inference(config):
         ])
 
     else:
+        print("Generating set of tasks")
         states_generator = StatesGenerator(config)
         states_batch, states_lens, len_mask = states_generator.generate_states_batch()
     
@@ -32,14 +37,26 @@ def inference(config):
     actor.policy_dnn = torch.load(config.model_path, map_location=torch.device(device))
     actor.policy_dnn.dec_input = actor.policy_dnn.dec_input[:config.batch_size]    
 
-    # Get agent reward
+    # Execute model  
+    gc.disable()
+    start = time.process_time_ns()
     allocation_order = actor.apply_policy(
         states_batch,
         states_lens,
         len_mask
     )
+    middle = time.process_time_ns()
     avg_occ_ratio = compute_reward(config, states_batch, len_mask, allocation_order).mean()
+    end = time.process_time_ns()
+    gc.enable()
+
+    model_mean_time_ms = (end - start) / len(states_batch) / 1000000
+    drl_mean_time_ms   = (middle - start) / len(states_batch) / 1000000
+    order_mean_time_ms = (end - middle) / len(states_batch) / 1000000
+
+    str = f"Average occupancy ratio with RL+{config.agent_heuristic} agent: {avg_occ_ratio:.1%} "
+    str += f"({model_mean_time_ms} ms = {drl_mean_time_ms} ms + {order_mean_time_ms} ms)"
+    print(str)
+
+    # Execute heuristics
     benchmark_rewards = get_benchmark_rewards(config, states_batch=states_batch)
-    print(f"Average occupancy ratio with RL agent: {avg_occ_ratio:.1%}")
-    for reward, heuristic in zip(benchmark_rewards, ("NF", "FF", "FFD")):
-        print(f"Average occupancy ratio with {heuristic} heuristic: {reward:.1%}")

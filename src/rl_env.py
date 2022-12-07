@@ -4,6 +4,8 @@ Logic to generate new states and compute the reward for each state-action pair.
 
 import numpy as np
 from torch import dtype
+import time
+import gc
 
 class StatesGenerator(object):
     """
@@ -104,25 +106,51 @@ def get_benchmark_rewards(config, states_generator: StatesGenerator=None, states
     a NF, FF and FFD heuristic respectively.
     """
     nf_reward, ff_reward, ffd_reward = [], [], []
+    nf_time, ff_time, ffd_time = [], [], []
     if states_generator is not None:
         states, states_lens, len_mask = states_generator.generate_states_batch(
-            batch_size=10000
+            batch_size = 10000
         )
     else:
         states = states_batch
 
     items_order_default = np.arange(config.max_num_items)
     for state in states:
+        gc.disable()
+        start = time.process_time_ns()
+        res = avg_occupancy(config.bin_size, state, items_order_default, heuristic="NF")
+        end = time.process_time_ns()
+        nf_reward.append(res)
+        nf_time.append(end - start)
+        gc.enable()
 
-        nf_reward.append(
-            avg_occupancy(config.bin_size, state, items_order_default, heuristic="NF")
-        )
-        ff_reward.append(
-            avg_occupancy(config.bin_size, state, items_order_default, heuristic="FF")
-        )
+        gc.disable()
+        start = time.process_time_ns()
+        res = avg_occupancy(config.bin_size, state, items_order_default, heuristic="FF")
+        end = time.process_time_ns()
+        ff_reward.append(res)
+        ff_time.append(end - start)
+        gc.enable()
+
+        gc.disable()
+        start = time.process_time_ns()
         items_order_decreasing = np.flip(np.argsort(state))
-        ffd_reward.append(
-            avg_occupancy(config.bin_size, state, items_order_decreasing, heuristic="FF")
-        )
+        res = avg_occupancy(config.bin_size, state, items_order_decreasing, heuristic="FF")
+        end = time.process_time_ns()
+        ffd_reward.append(res)
+        ffd_time.append(end - start)
+        gc.enable()
 
-    return np.mean(nf_reward), np.mean(ff_reward), np.mean(ffd_reward)
+    nf_mean_reward  = np.mean(nf_reward)
+    ff_mean_reward  = np.mean(ff_reward)
+    ffd_mean_reward = np.mean(ffd_reward)
+
+    nf_mean_time  = np.mean(nf_time) / 1000000
+    ff_mean_time  = np.mean(ff_time) / 1000000
+    ffd_mean_time = np.mean(ffd_time) / 1000000
+
+    print(f"Average occupancy ratio with NF heuristic: {nf_mean_reward:.1%} ({nf_mean_time} ms)")
+    print(f"Average occupancy ratio with FF heuristic: {ff_mean_reward:.1%} ({ff_mean_time} ms)")
+    print(f"Average occupancy ratio with FFD heuristic: {ffd_mean_reward:.1%} ({ffd_mean_time} ms)")
+
+    return nf_mean_reward, ff_mean_reward, ffd_mean_reward
